@@ -1,16 +1,17 @@
 import express from "express";
 import writeMessage from "../writeMessage";
+import readMessages from "../readMessages";
 
 const messagesRouter = express.Router();
 
-messagesRouter.get('/', (req, res) => {
-	res.send('List of products will be here');
+messagesRouter.get('/', async (req, res) => {
+	const data = await readMessages();
+	res.send(data);
 });
 
-messagesRouter.post('/', (req, res) => {
+messagesRouter.post('/', async (req, res) => {
 	const date = new Date().toISOString();
-
-	writeMessage(req.body, date);
+	void await writeMessage(req.body, date);
 	res.send({...req.body, datetime: date});
 });
 

@@ -8,7 +8,6 @@ const writeMessage = async (message: message, date: string) => {
 
 	try {
 		await fs.writeFile(fileName, message.message);
-		console.log('File was saved!');
 	} catch (err) {
 		console.error(err);
 	}
